@@ -42,6 +42,7 @@ def copyFileToFile(file1, file2):
             f2.write(f1.read())
 
 
+
 if __name__ == '__main__':
     # copyDir(r'E:\io', r'F:\io1')
     # copyDir(r'F:\heima\33期就业班', r'F:\heima1')  # 程序执行共用时：57.18418884277344
