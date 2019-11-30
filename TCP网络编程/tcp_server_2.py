@@ -10,17 +10,13 @@ socket_server.listen(128)
 #
 print('服务端已经启动')
 service_client_socket, ip_port = socket_server.accept()
+service_client_socket.close()
 print('客户端的ip地址和端口号：', ip_port)
 
-while True:
-    recv_data = service_client_socket.recv(1024)
-    if len(recv_data) == 0:
-        print('对方下线了')
-        break
-    print('接收到客户端信息为：', recv_data.decode('gbk'))
+recv_data = service_client_socket.recv(1024)
+print('接收到客户端信息为：', recv_data.decode('gbk'))
 
-    service_client_socket.send('我是服务端，已经收到你的信息'.encode('gbk'))
+service_client_socket.send('我是服务端，已经收到你的信息'.encode('gbk'))
 
-service_client_socket.close()
 #
-socket_server.close()
+# socket_server.close()
