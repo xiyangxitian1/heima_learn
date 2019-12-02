@@ -14,13 +14,23 @@ class Solution(object):
         """
         if len(nums) == 0:
             return 0
-        len1 = len(nums)
-        max_sum = nums[0]
-        for i in range(len1):
-            for j in range(i + 1, len1 + 1, 1):
-                max_sum = max_sum if max_sum >= sum(nums[i:j]) else sum(nums[i:j])
-
-        return max_sum
+        # len1 = len(nums)
+        # max_sum = nums[0]
+        # # 这个方法不行，用了两个循环，数据量太大，如1000的时候就运行时候太长了。
+        # for i in range(len1):
+        #     for j in range(i + 1, len1 + 1, 1):
+        #         max_sum = max_sum if max_sum >= sum(nums[i:j]) else sum(nums[i:j])
+        #
+        # return max_sum
+        anx = nums[0]
+        sum = 0
+        for n in nums:
+            if sum > 0:
+                sum += n
+            else:
+                sum = n
+            anx = max(sum, anx)
+        return anx
 
 
 if __name__ == '__main__':

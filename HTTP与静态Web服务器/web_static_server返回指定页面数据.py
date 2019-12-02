@@ -1,49 +1,53 @@
-import socketserver
+import socket
 
+if __name__ == '__main__':
+    # server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-class MyTCPHandler(socketserver.BaseRequestHandler):
-    def handle(self):
+    server_socket = socket.socket()
+
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+    server_socket.bind(('', 8080))
+
+    server_socket.listen(128)
+    while True:
+        new_server, ip_port = server_socket.accept()
+        recv_data = new_server.recv(1024)
+        if not recv_data:
+            print('浏览器关闭了..')
+            new_server.close()
+            continue
+        recv_content = recv_data.decode('utf-8')
+        print('收到的数据：', recv_content)
+        # 请求页面
+        req_page = recv_content.split(maxsplit=2)[1]
+        print('请求页面：', req_page)
+        if req_page == '/':
+            req_page = '/index.html'
         try:
-            with open(r'F:\英语晨读\EnglishWord\Chapter-1-page-1.html', 'rb') as f:
+            with open('static' + req_page, 'rb') as f:
                 send_data = f.read()
+        except FileNotFoundError as e:
+            print('请求页不存在……')
+            # 响应行
+            response_line = "HTTP/1.1 404 Not Found\r\n"
+            # 响应头
+            response_header = "Server: PWS1.0\r\n"
+            with open('static/error.html', 'rb') as f:
+                send_data = f.read()
+            # 响应体
+            response_body = send_data
+        else:
+            print('请求存在……')
             # 响应行
             response_line = "HTTP/1.1 200 OK\r\n"
             # 响应头
             response_header = "Server: PWS1.0\r\n"
-
             # 响应体
             response_body = send_data
 
+        finally:
             # 拼接响应报文
             response_data = (response_line + response_header + "\r\n").encode("utf-8") + response_body
-
-            while True:
-                self.data = self.request.recv(1024)  #
-                print('接收到的数据：' + self.data)
-
-                print("{} send:".format(self.client_address), self.data)
-                if not self.data:
-                    print("connection lost")
-                    break
-                self.request.sendall(self.data.upper())
-                self.request.close()  # 一次连接就断开
-        except Exception as e:
-            print(self.client_address, "连接断开")
-
-    # finally:
-    #     self.request.close()
-
-    def setup(self):
-        print("before handle,连接建立：", self.client_address)
-
-    def finish(self):
-        print("finish run  after handle")
-
-
-if __name__ == "__main__":
-    # HOST, PORT = "localhost", 9998
-    HOST, PORT = '', 8080
-    server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
-    server.allow_reuse_address = True  # 设置端口可复用  默认是False
-    server.request_queue_size = 128  # 默认为5
-    server.serve_forever()
+            new_server.send(response_data)
+            # 每次都关闭
+            new_server.close()

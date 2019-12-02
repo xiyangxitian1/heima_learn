@@ -1,14 +1,15 @@
 import socket
 import threading
+import sys
 
 
 class HttpWebServer(object):
     """面向对象HttpWebServer"""
 
-    def __init__(self):
+    def __init__(self, port):
         server_socket = socket.socket()
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
-        server_socket.bind(('', 8080))
+        server_socket.bind(('', port))
         server_socket.listen(128)
         self.server_socket = server_socket
 
@@ -36,6 +37,8 @@ class HttpWebServer(object):
         print('请求页面：', req_page)
         if req_page == '/':
             req_page = '/index.html'
+        if '.' not in req_page:
+            req_page += '.html'
         try:
             with open('static' + req_page, 'rb') as f:
                 send_data = f.read()
@@ -72,7 +75,14 @@ class HttpWebServer(object):
 
 
 def main():
-    httpWebServer = HttpWebServer()
+    if len(sys.argv) != 2:
+        print('必须传个端口号参数')
+        return
+    if not sys.argv[1].isdigit():
+        print('端口号必须是整数数字')
+        return
+    port = int(sys.argv[1])
+    httpWebServer = HttpWebServer(port)
     httpWebServer.start()
 
 

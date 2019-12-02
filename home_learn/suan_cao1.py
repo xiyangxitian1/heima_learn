@@ -1,45 +1,22 @@
 import random
 import time
 
-list = [1, 3, 6, 4, 5, 7, 9]
-result = 10
-len1 = len(list)
-# print(list)
-# list.sort()
 
-result_list = []
-index_list = []
-count = 0
-while True:
-    # index_list.clear()
-    index = random.randint(0, len1 - 1)
-    if index not in index_list:
-        index_list.append(index)
-    else:
-        continue
+def suanSum(list1, target):
+    list1.sort()
+    begin = 0
+    end = 1
 
-    # print('index_list', index_list)
-    l = [list[i] for i in index_list]  # 列表推导式
-    l.sort()
-    sum1 = sum(l)
-    if sum1 == result:
-        if l not in result_list:
-            count = 0
-            print('结果是:', l)
-            result_list.append(l)
-            index_list.clear()
-            continue
-        else:
-            count += 1
+    for i in range(len(list1)):
+        for j in range(i + 1, len(list1) + 1):
+            if sum(list1[i:j]) == target:
+                print(list1[i:j])
 
-    if len(index_list) == len1:
-        # print('clear..')
-        index_list.clear()
 
-    if count > 2:
-        print('已经查找全部结果')
-        break
+if __name__ == '__main__':
+    x = [1, 3, 6, 4, 5, 7, 9]
+    # 1,3,4,5,6,7,9  所以没有等于10的，但是 列表中是有和是10的，所以这个算法不可以
+    # 那达到所有的排序再调用这个方法？  那就太慢了，因为所有的排序也是太多了。
 
-print('结果是:')
-for res in result_list:
-    print(res)
+    target = 10
+    suanSum(x, target)
