@@ -5,7 +5,7 @@ client = socket.socket()
 # client.connect(('39.156.69.79', 80))
 client.connect(('wwww.baidu.com', 80))  # 200 OK
 # client.connect(('220.181.38.150', 80)) # 302 重定向
-req_h = 'GET / HTTP/1.1\r\n'
+req_h = 'GET / HTTP/1.1\r\n'  # 请求行（请求方式 资源路径 协议版本）
 req_head = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\n' \
            'Accept-Encoding: gzip, deflate, br\r\n' \
            'Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8\r\n' \
