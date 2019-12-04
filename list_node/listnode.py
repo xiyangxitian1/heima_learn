@@ -226,7 +226,6 @@ class ListNode:
             i += 1
             self = self.next
 
-
     def reverse(self):
         """
             翻转
@@ -237,6 +236,14 @@ class ListNode:
         lst.reverse()
         return ListNode.list2Node(lst)
 
+    def sort(self, reverse=False):
+        """
+            排序
+        :return:
+        """
+        lst = self.toList()
+        lst.sort(reverse=reverse)
+        return ListNode.list2Node(lst)
 
     def __str__(self):
         """打印链表"""
@@ -250,12 +257,12 @@ class ListNode:
         return ''.join(str(i) for i in result)
 
 
-if __name__ == '__main__':
-    l = [1, 2, 3, 4, 5]
-    n = ListNode.list2Node(l)
-    print(n)
-    n = n.reverse()
-    print(n)
+# if __name__ == '__main__':
+#     l = [1, 3, 4, 2, 5]
+#     n = ListNode.list2Node(l)
+#     print(n)
+#     n = n.sort()
+#     print(n)
 # n.printNode()
 # l1 = n.toList()
 # print(l1)

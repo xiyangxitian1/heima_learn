@@ -1,6 +1,4 @@
-a = '10'
-b = list(a)
-print(b)
-b.reverse()
-print(b)
-print(''.join(b))
+num = [1, 2, 3, 4, 5]
+num[:] = [3, 4, 5]
+num1 = [3, 4, 5]
+print(num == num1)
