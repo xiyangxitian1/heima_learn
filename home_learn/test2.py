@@ -1,6 +1,7 @@
-with open('../my_util/pwd.txt', 'r') as f:
-    a = f.read()
-    if '3pn9tse6' in a:
-        print('ok')
-    else:
-        print('no')
+from PIL import Image
+import time
+
+img = Image.open('1.jpg')
+img.show()
+time.sleep(5)
+img.close()

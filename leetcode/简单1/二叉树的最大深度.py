@@ -5,12 +5,16 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        # 思路，遍历节点 先根遍历，如果遍历路径到都是向右，就退出。
+        return 0 if not root else max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
-        head = root
-        maxDep = 0
-        return maxDep
+    """
+     顶 ：求？
+     
+     max(左节点的最大深度，右节点的最大深度）+ 1
+     
+     叶子的最大深度   1
+    
+    """
