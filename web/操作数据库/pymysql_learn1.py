@@ -1,14 +1,14 @@
 import pymysql
 
 # 创建连接对象
-conn = pymysql.connect(host='192.168.84.128', user='root', password='mysql', database='jing_dong',
+conn = pymysql.connect(host='192.168.117.128', user='root', password='mysql', database='mysql',
                        charset='utf8')
 
 # 获取游标对象
 cursor = conn.cursor()
 
 # 查询 SQL 语句
-sql = "select * from goods"
+sql = "select * from user"
 # 执行 SQL 语句 返回值就是 SQL 语句在执行过程中影响的行数
 row_count = cursor.execute(sql)
 print("SQL 语句执行影响的行数%d" % row_count)
