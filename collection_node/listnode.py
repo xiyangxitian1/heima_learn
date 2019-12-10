@@ -238,7 +238,7 @@ class ListNode:
 
     def sort(self, reverse=False):
         """
-            排序
+            cao
         :return:
         """
         lst = self.toList()
