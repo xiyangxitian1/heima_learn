@@ -41,6 +41,8 @@ list1 = [
 ]
 # list = [1, 3, 6, 4, 5, 7, 9]
 result = 285718.69
+if sum(list1) == result:
+    print("所有数据相加就是结果!")
 len1 = len(list1)
 # print(list)
 # list.sort()
@@ -70,7 +72,7 @@ while True:
         else:
             count += 1
 
-    if len(index_list) == len1:
+    if len(index_list) == len1 - 1:
         # print('clear..')
         index_list.clear()
 

@@ -29,7 +29,7 @@ class Solution(object):
                 sum += n
             else:
                 sum = n
-            anx = max(sum, anx)
+            anx = max(sum, anx)  # 永远只记录最大值
         return anx
 
 
