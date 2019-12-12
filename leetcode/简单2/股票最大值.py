@@ -8,12 +8,6 @@ import 一个越长列表
 # 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
 class Solution:
     def maxProfit1(self, prices: List[int]) -> int:
-        """
-            没有完成交易最大利润就是为0
-            超出时间限制，算法太low了
-            看哪里有改进的地方
-
-        """
         if not prices or len(prices) == 1:
             return 0
         minP = min(prices)
